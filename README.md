@@ -4,7 +4,7 @@
 
 ## Summary:
 
-1. Part One = Android Jetpack: LiveData and ViewModel
+1. Part One - Android Jetpack: LiveData and ViewModel
    - [release/livedata-viewmodel] (https://github.com/lahlis/diosoccernews/tree/release/livedata-viewmodel)
 
 
