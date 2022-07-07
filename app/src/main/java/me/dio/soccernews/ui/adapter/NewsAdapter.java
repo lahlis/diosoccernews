@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         this.news = news;
         this.favoriteListener = favoriteListener;
     }
+
 
 
     @Override
@@ -69,15 +69,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             notifyItemChanged(position);
         });
 
-        int favoriteColor = news.favorite ? R.color.salmon_3 : R.color.grey;
-         holder.binding.ivFavorite.setColorFilter(context.getResources().getColor(favoriteColor));
+        int favoriteColor = news.favorite ? R.color.pink_1000 : R.color.grey;
+        holder.binding.ivFavorite.setColorFilter(context.getResources().getColor(favoriteColor));
 
     }
 
     @Override
-    public int getItemCount() {
-        return this.news.size();
-    }
+    public int getItemCount() { return this.news.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

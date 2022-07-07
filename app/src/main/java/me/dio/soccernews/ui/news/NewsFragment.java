@@ -1,6 +1,5 @@
 package me.dio.soccernews.ui.news;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.Room;
 
-
-import me.dio.soccernews.MainActivity;
 import me.dio.soccernews.data.local.AppDatabase;
 import me.dio.soccernews.databinding.FragmentNewsBinding;
 import me.dio.soccernews.ui.adapter.NewsAdapter;
@@ -21,34 +17,25 @@ import me.dio.soccernews.ui.adapter.NewsAdapter;
 public class NewsFragment extends Fragment {
 
     private FragmentNewsBinding binding;
-    private AppDatabase db;
+    private NewsViewModel newsViewModel;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        NewsViewModel newsViewModel =
-                new ViewModelProvider(this).get(NewsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
         binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
 
-
-
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            binding.rvNews.setAdapter(new NewsAdapter(news, updatedNews -> {
-                MainActivity activity = (MainActivity) getActivity();
-                if (activity != null) {
-                    activity.getDb().newsDao().save(updatedNews);
-                }
-            }));
+            binding.rvNews.setAdapter(new NewsAdapter(news, favoriteNews ->
+                    newsViewModel.saveNews(favoriteNews)));
 
         });
 
-        newsViewModel.getState().observe(getViewLifecycleOwner(), state ->{
-            switch (state){
+        newsViewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            switch (state) {
                 case DOING:
                     //TODO Iniciar SwipeRefreshLayout
                     break;
