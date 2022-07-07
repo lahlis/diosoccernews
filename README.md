@@ -9,5 +9,6 @@
    
 2. Part Two - API (GitHub Pages), Retrofit and Picasso
    - [release/api-and-picasso] (https://github.com/lahlis/diosoccernews/tree/release/api-and-picasso)
-
-
+   
+3. Part Three - Room and Implementation of "Share" and "Favorite" 
+   - [release/room-share-fav] (https://github.com/lahlis/diosoccernews/tree/release/room-share-fav)
